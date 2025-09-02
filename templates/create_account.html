@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+   body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ background: url("{{ url_for('static', filename='images/uu.png') }}") no-repeat center center/cover;
+  font-family: 'Inter', sans-serif;   /* 👈 Use Inter everywhere by default */
+  background-color: #f7f7f7;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 115vh;
+  padding: 1rem;
+}
+
+    .login-icon {
+    display: block;
+    width: 30%;
+    height: 30%;
+    margin: 0 auto 15px auto;
+    }
+
+    main {
+      background-color: #fff;
+      padding: 2rem;
+      z-index: 2;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      width: 100%;
+      max-width: 400px;
+      position: center;
+      margin-top: -5rem;
+    }
+    p {
+    text-align: center;
+    margin-top:1rem;
+    margin-bottom:1.5rem;
+    color: #666;
+}
+
+      h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-family: 'Poppins', sans-serif; /* 👈 Use Poppins for headings */
+    font-weight: 600; 
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+
+    .error {
+      border-color: #dc3545;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #0033bfff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+      touch-action: manipulation;
+    }
+
+    button:hover {
+      background-color:  #19028cff
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+    }
+
+    @media (min-width: 640px) {
+      main {
+        max-width: 500px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      main {
+        background-color: rgba(255, 255, 255, 0.95); /* make it slightly transparent */
+        max-width: 600px;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      input[type="text"], button {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* 🔹 Mobile-specific full background image */
+@media (max-width: 768px) {
+  body {
+    background-image: url("{{ url_for('static', filename='images/u.png') }}") !important;
+    background-size: cover;          /* Make image cover entire screen */
+    background-position: center;     /* Center the image */
+    background-repeat: no-repeat;    /* Prevent tiling */
+    background-attachment: fixed;    /* Keeps background fixed */
+    min-height: 100vh;               /* Always fill viewport height */
+    width: 100%;                     /* Full width */
+    overflow: hidden;                /* Avoid horizontal scrollbars */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background-image: url("{{ url_for('static', filename='images/u.png') }}") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 115vh;
+    width: 100%;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <main role="main">
+    <img src="{{ url_for('static', filename='images/do.png') }}" alt="To-Do Icon" class="login-icon" />
+    <h1>DO IT</h1>
+    <p>Let’s organize your day together</p>
+    <form id="usernameForm" method="post" aria-label="Username Form">
+
+      <div class="form-group" onsubmit="event.preventDefault(); window.location.href='add.html';">
+        <!--added the link to the home page in line 155-->
+        <label for="username">Enter your username:</label>
+        <input type="text" id="username" name="username" placeholder="johndoe" aria-describedby="usernameError" />
+        <div id="usernameError" class="error-message">Username cannot be empty</div>
+    <label for="password">Enter your password:</label>
+    <input type="password"  id="password" name="password"  placeholder="*******"  aria-describedby="passwordError" required/>
+      </div>
+      <button type="submit">Sign up</button>
+    </form>
+
+  </main>
+
+  <script>
+    const form = document.getElementById('usernameForm');
+    const usernameInput = document.getElementById('username');
+    const errorMessage = document.getElementById('usernameError');
+
+    function validateUsername() {
+      const username = usernameInput.value.trim();
+      if (username === '') {
+        usernameInput.classList.add('error');
+        errorMessage.style.display = 'block';
+        return false;
+      } else {
+        usernameInput.classList.remove('error');
+        errorMessage.style.display = 'none';
+        return true;
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (validateUsername()) {
+        
+        console.log('Username submitted:', usernameInput.value.trim());
+      }
+
+      form.submit();
+    });
+
+    usernameInput.addEventListener('input', validateUsername);
+
+    window.addEventListener('load', () => {
+      if (usernameInput.value.trim() !== '') {
+        usernameInput.classList.remove('error');
+        errorMessage.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

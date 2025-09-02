@@ -73,20 +73,23 @@
       color: #333;
     }
 
-    input[type="text"] {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    input[type="text"]:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-    }
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
 
     .error {
       border-color: #dc3545;
@@ -192,7 +195,14 @@
         <label for="username">Enter your username:</label>
         <input type="text" id="username" name="username" placeholder="johndoe" aria-describedby="usernameError" />
         <div id="usernameError" class="error-message">Username cannot be empty</div>
-      </div>
+    <label for="password">Enter your password:</label>
+    <input type="password"  id="password" name="password"  placeholder="*******"  aria-describedby="passwordError" required/>
+   
+    <p>Don't have an account? 
+        <a href ="create_account.html">Sign up here</a>
+    </p>
+  
+  </div>
       <button type="submit">Get Started</button>
     </form>
 
@@ -219,7 +229,7 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (validateUsername()) {
-        // Add your logic for successful submission
+        
         console.log('Username submitted:', usernameInput.value.trim());
       }
 
@@ -228,7 +238,6 @@
 
     usernameInput.addEventListener('input', validateUsername);
 
-    // Ensure error state is cleared on page load
     window.addEventListener('load', () => {
       if (usernameInput.value.trim() !== '') {
         usernameInput.classList.remove('error');
